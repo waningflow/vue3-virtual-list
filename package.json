@@ -9,9 +9,11 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "faker": "^5.1.0",
     "vue": "^3.0.0"
   },
   "devDependencies": {
+    "@types/faker": "^5.1.5",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
     "@vue/cli-plugin-babel": "~4.5.0",

@@ -1,6 +1,8 @@
 <template>
   <div class="vue3-virtual-table-container">
-    vvv
+    <div v-for="item in data" :key="item.id">
+      {{ item.name }}/{{ item.email }}/{{ item.address }}
+    </div>
   </div>
 </template>
 
@@ -10,7 +12,7 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "VueVirtualList",
   props: {
-    msg: String
+    data: Array
   }
 });
 </script>

@@ -1,13 +1,19 @@
 <template>
-  <VueVirtualList msg="Welcome to Your Vue.js + TypeScript App" />
+  <VueVirtualList :data="dataSource" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import VueVirtualList from "./vue3-virtual-list.vue";
+import { mock } from "./utils";
 
 export default defineComponent({
   name: "App",
+  data() {
+    return {
+      dataSource: mock(100000)
+    };
+  },
   components: {
     VueVirtualList
   }
