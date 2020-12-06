@@ -1,5 +1,9 @@
 <template>
-  <VueVirtualList :data="dataSource" />
+  <VueVirtualList :data="dataSource">
+    <template v-slot="{ item }">
+      {{ item.name }}/{{ item.email }}/{{ item.address }}
+    </template>
+  </VueVirtualList>
 </template>
 
 <script lang="ts">
@@ -11,7 +15,7 @@ export default defineComponent({
   name: "App",
   data() {
     return {
-      dataSource: mock(100000)
+      dataSource: mock(10000)
     };
   },
   components: {

@@ -1,7 +1,7 @@
 <template>
   <div class="vue3-virtual-table-container">
     <div v-for="item in data" :key="item.id">
-      {{ item.name }}/{{ item.email }}/{{ item.address }}
+      <slot :item="item"></slot>
     </div>
   </div>
 </template>
@@ -17,7 +17,6 @@ export default defineComponent({
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
 .vue3-virtual-table-container {
   width: 500px;
