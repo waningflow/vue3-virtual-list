@@ -1,7 +1,7 @@
 <template>
   <div class="vue3-virtual-table-container">
-    <div v-for="item in data" :key="item.id">
-      <slot :item="item"></slot>
+    <div v-for="(item, index) in data" :key="item.id">
+      <slot :item="item" :index="index"></slot>
     </div>
   </div>
 </template>
@@ -19,7 +19,10 @@ export default defineComponent({
 
 <style scoped lang="less">
 .vue3-virtual-table-container {
-  width: 500px;
-  height: 200px;
+  width: 100%;
+  height: 100%;
+  min-width: 100px;
+  min-height: 100px;
+  overflow: auto;
 }
 </style>
