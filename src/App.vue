@@ -22,7 +22,7 @@ export default defineComponent({
   name: "App",
   data() {
     return {
-      dataSource: mock(50000)
+      dataSource: mock(1000)
     };
   },
   components: {
@@ -43,7 +43,8 @@ export default defineComponent({
 .list-container {
   width: 800px;
   height: 600px;
-  border: 2px solid #aaa;
+  border: 2px solid #4caf50;
+  margin: 0 auto;
 }
 .item-container {
   height: 50px;
