@@ -57,10 +57,12 @@ export default defineComponent({
     const scrollHeight = ref(data.value.length * itemSize.value);
     let containerSize = 0;
     const paddingTop = ref(0);
+    let isScrollBusy = false;
 
     const handleScroll = () => {
       if (!root.value) return;
-      console.log(root.value.scrollTop);
+      if (isScrollBusy) return;
+      isScrollBusy = true;
 
       // get range
       const range: number[] = [];
@@ -77,6 +79,10 @@ export default defineComponent({
         .slice(range[0], range[0] + range[1])
         .map((v, i) => ({ ...v, _index: range[0] + i }));
       paddingTop.value = range[0] * itemSize.value;
+
+      setTimeout(() => {
+        isScrollBusy = false;
+      }, 100);
     };
 
     onMounted(() => {
