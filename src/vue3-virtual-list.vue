@@ -4,13 +4,17 @@
     ref="root"
     @scroll.passive="handleScroll"
   >
-    <div class="vue3-virtual-list-scroll" :style="`height: ${scrollHeight}px`">
+    <div
+      class="vue3-virtual-list-scroll"
+      :style="`height: ${scrollHeight}px;padding-top: ${paddingTop}px`"
+    >
       <div
-        v-for="(item, index) in pool"
-        :key="item.id"
+        class="vue3-virtual-list-item-container"
+        v-for="item in pool"
+        :key="item[dataKey]"
         :style="`height: ${itemSize}px`"
       >
-        <slot :item="item" :index="index"></slot>
+        <slot :item="item" :index="item._index"></slot>
       </div>
     </div>
   </div>
@@ -52,21 +56,41 @@ export default defineComponent({
     const pool = ref<any[]>([]);
     const scrollHeight = ref(data.value.length * itemSize.value);
     let containerSize = 0;
+    const paddingTop = ref(0);
 
     const handleScroll = () => {
       if (!root.value) return;
       console.log(root.value.scrollTop);
+
+      // get range
+      const range: number[] = [];
+      range[0] =
+        Math.floor(root.value.scrollTop / itemSize.value) -
+        Math.floor(poolBuffer.value / 2);
+      range[0] = Math.max(range[0], 0);
+      range[1] =
+        range[0] +
+        Math.floor(root.value.clientHeight / itemSize.value) +
+        poolBuffer.value;
+      range[1] = Math.min(range[1], data.value.length);
+      pool.value = data.value
+        .slice(range[0], range[0] + range[1])
+        .map((v, i) => ({ ...v, _index: range[0] + i }));
+      paddingTop.value = range[0] * itemSize.value;
     };
 
     onMounted(() => {
-      containerSize = root.value ? root.value["offsetHeight"] : 0;
+      if (!root.value) return;
+      containerSize = root.value.clientHeight;
       const contentLines = Math.ceil(containerSize / itemSize.value);
       const totalLines = contentLines + poolBuffer.value;
       const range = [0, totalLines];
-      pool.value = data.value.slice(range[0], range[0] + range[1]);
+      pool.value = data.value
+        .slice(range[0], range[0] + range[1])
+        .map((v, i) => ({ ...v, _index: range[0] + i }));
     });
 
-    return { pool, scrollHeight, root, handleScroll };
+    return { pool, scrollHeight, root, handleScroll, paddingTop };
   }
 });
 </script>
@@ -78,5 +102,11 @@ export default defineComponent({
   min-width: 100px;
   min-height: 100px;
   overflow: auto;
+}
+.vue3-virtual-list-scroll {
+  box-sizing: border-box;
+}
+.vue3-virtual-list-item-container {
+  overflow: hidden;
 }
 </style>
