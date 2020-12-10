@@ -1,7 +1,11 @@
 <template>
-  <div class="vue3-virtual-list-container">
-    <div class="vue3-virtual-list-scroll">
-      <div v-for="(item, index) in pool" :key="item.id">
+  <div class="vue3-virtual-list-container" ref="root">
+    <div class="vue3-virtual-list-scroll" :style="`height: ${scrollHeight}px`">
+      <div
+        v-for="(item, index) in pool"
+        :key="item.id"
+        :style="`height: ${itemSize}px`"
+      >
         <slot :item="item" :index="index"></slot>
       </div>
     </div>
@@ -9,13 +13,13 @@
 </template>
 
 <script lang="ts">
-import { ref, toRefs, reactive, defineComponent } from "vue";
+import { ref, toRefs, reactive, defineComponent, onMounted } from "vue";
 
 interface Props {
   data: any[];
   dataKey: string;
   itemSize: number;
-  poolSize: number;
+  poolBuffer: number;
 }
 
 export default defineComponent({
@@ -33,16 +37,27 @@ export default defineComponent({
       type: Number,
       default: () => 40
     },
-    poolSize: {
+    poolBuffer: {
       type: Number,
-      default: () => 100
+      default: () => 50
     }
   },
   setup(props: Props): any {
-    // const { data, poolSize } = toRefs(props);
-    const range = [0, props.poolSize];
-    const pool = ref(props.data.slice(range[0], range[0] + range[1]));
-    return { pool };
+    const { data, poolBuffer, itemSize } = toRefs(props);
+    const root = ref<any>(null);
+    const pool = ref<any[]>([]);
+    const scrollHeight = ref(data.value.length * itemSize.value);
+    let containerSize = 0;
+
+    onMounted(() => {
+      containerSize = root.value ? root.value["offsetHeight"] : 0;
+      const contentLines = Math.ceil(containerSize / itemSize.value);
+      const totalLines = contentLines + poolBuffer.value;
+      const range = [0, totalLines];
+      pool.value = data.value.slice(range[0], range[0] + range[1]);
+    });
+
+    return { pool, scrollHeight, root };
   }
 });
 </script>

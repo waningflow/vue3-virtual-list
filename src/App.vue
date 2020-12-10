@@ -47,7 +47,7 @@ export default defineComponent({
   margin: 0 auto;
 }
 .item-container {
-  height: 50px;
+  height: 40px;
   display: flex;
   flex-direction: row;
   align-items: center;
