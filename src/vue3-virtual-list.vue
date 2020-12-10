@@ -1,5 +1,9 @@
 <template>
-  <div class="vue3-virtual-list-container" ref="root">
+  <div
+    class="vue3-virtual-list-container"
+    ref="root"
+    @scroll.passive="handleScroll"
+  >
     <div class="vue3-virtual-list-scroll" :style="`height: ${scrollHeight}px`">
       <div
         v-for="(item, index) in pool"
@@ -44,10 +48,15 @@ export default defineComponent({
   },
   setup(props: Props): any {
     const { data, poolBuffer, itemSize } = toRefs(props);
-    const root = ref<any>(null);
+    const root = ref<HTMLElement | null>(null);
     const pool = ref<any[]>([]);
     const scrollHeight = ref(data.value.length * itemSize.value);
     let containerSize = 0;
+
+    const handleScroll = () => {
+      if (!root.value) return;
+      console.log(root.value.scrollTop);
+    };
 
     onMounted(() => {
       containerSize = root.value ? root.value["offsetHeight"] : 0;
@@ -57,7 +66,7 @@ export default defineComponent({
       pool.value = data.value.slice(range[0], range[0] + range[1]);
     });
 
-    return { pool, scrollHeight, root };
+    return { pool, scrollHeight, root, handleScroll };
   }
 });
 </script>
