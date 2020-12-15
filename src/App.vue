@@ -4,6 +4,7 @@
       <template v-slot="{ item, index }">
         <div class="item-container">
           <div class="cell cell-index">{{ index + 1 }}</div>
+          <div class="cell cell-img"><img :src="item.img" /></div>
           <div class="cell">{{ item.name }}</div>
           <div class="cell">{{ item.email }}</div>
           <div class="cell">{{ item.address }}</div>
@@ -60,7 +61,8 @@ export default defineComponent({
   text-overflow: ellipsis;
   text-align: left;
   white-space: nowrap;
-  &.cell-index {
+  &.cell-index,
+  &.cell-img {
     flex: none;
     min-width: 60px;
   }

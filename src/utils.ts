@@ -21,7 +21,8 @@ export function mock(length = 1000) {
       id: uuid(),
       name: faker.name.findName(),
       email: faker.internet.email(),
-      address: faker.address.country()
+      address: faker.address.country(),
+      img: faker.image.imageUrl()
     };
   });
 }
