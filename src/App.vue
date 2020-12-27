@@ -23,7 +23,7 @@ export default defineComponent({
   name: "App",
   data() {
     return {
-      dataSource: mock(10000)
+      dataSource: mock(100000)
     };
   },
   components: {

@@ -67,6 +67,7 @@ export default defineComponent({
       requestAnimationFrame(() => {
         isScrollBusy = false;
         if (!root.value) return;
+        const d1 = Date.now();
         const range: number[] = [];
         range[0] =
           Math.floor(root.value.scrollTop / itemSize.value) -
@@ -77,10 +78,13 @@ export default defineComponent({
           Math.floor(root.value.clientHeight / itemSize.value) +
           poolBuffer.value;
         range[1] = Math.min(range[1], data.value.length);
+        const d2 = Date.now();
         pool.value = data.value
-          .slice(range[0], range[0] + range[1])
+          .slice(range[0], range[1])
           .map((v, i) => ({ ...v, _index: range[0] + i }));
         paddingTop.value = range[0] * itemSize.value;
+        const d3 = Date.now();
+        console.log(d2 - d1, d3 - d2);
       });
     };
 
