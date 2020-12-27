@@ -64,25 +64,24 @@ export default defineComponent({
       if (isScrollBusy) return;
       isScrollBusy = true;
 
-      // get range
-      const range: number[] = [];
-      range[0] =
-        Math.floor(root.value.scrollTop / itemSize.value) -
-        Math.floor(poolBuffer.value / 2);
-      range[0] = Math.max(range[0], 0);
-      range[1] =
-        range[0] +
-        Math.floor(root.value.clientHeight / itemSize.value) +
-        poolBuffer.value;
-      range[1] = Math.min(range[1], data.value.length);
-      pool.value = data.value
-        .slice(range[0], range[0] + range[1])
-        .map((v, i) => ({ ...v, _index: range[0] + i }));
-      paddingTop.value = range[0] * itemSize.value;
-
-      setTimeout(() => {
+      requestAnimationFrame(() => {
         isScrollBusy = false;
-      }, 100);
+        if (!root.value) return;
+        const range: number[] = [];
+        range[0] =
+          Math.floor(root.value.scrollTop / itemSize.value) -
+          Math.floor(poolBuffer.value / 2);
+        range[0] = Math.max(range[0], 0);
+        range[1] =
+          range[0] +
+          Math.floor(root.value.clientHeight / itemSize.value) +
+          poolBuffer.value;
+        range[1] = Math.min(range[1], data.value.length);
+        pool.value = data.value
+          .slice(range[0], range[0] + range[1])
+          .map((v, i) => ({ ...v, _index: range[0] + i }));
+        paddingTop.value = range[0] * itemSize.value;
+      });
     };
 
     onMounted(() => {
