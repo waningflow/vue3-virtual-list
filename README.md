@@ -8,7 +8,7 @@ Scroll list for big acount of data. Based on Vue3.
 ## Install
 
 ```
-yarn add vue3-virtual-table
+yarn add vue3-virtual-list
 ```
 
 ## Example
