@@ -1,6 +1,7 @@
 {
   "name": "vue3-virtual-list",
-  "version": "1.0.0-alpha4",
+  "version": "1.0.0-alpha5",
+  "keywords": ["vue", "vue3", "scroll", "list"],
   "module": "dist/index.esm.js",
   "main": "dist/index.cjs.js",
   "unpkg": "dist/index.global.js",
