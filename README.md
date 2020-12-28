@@ -1,5 +1,10 @@
 # vue3-virtual-list
 
+[![npm](https://img.shields.io/npm/v/vue3-virtual-list.svg)](https://www.npmjs.com/package/vue3-virtual-list)
+[![vue3](https://img.shields.io/badge/vue-3.x-brightgreen.svg)](https://vuejs.org/)
+
+Scroll list for big acount of data. Based on Vue3.
+
 ## Install
 
 ```
@@ -29,10 +34,9 @@ yarn add vue3-virtual-table
   import { mock } from './utils';
 
   export default {
-    name: 'App',
     data() {
       return {
-        dataSource: mock(1000),
+        dataSource: mock(100000),
       };
     },
     components: {
@@ -42,15 +46,6 @@ yarn add vue3-virtual-table
 </script>
 
 <style>
-  #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-  }
-
   .list-container {
     width: 800px;
     height: 600px;
@@ -63,18 +58,6 @@ yarn add vue3-virtual-table
     flex-direction: row;
     align-items: center;
     border-bottom: 1px solid #ccc;
-  }
-  .cell {
-    margin: 0 8px;
-    flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-align: left;
-    white-space: nowrap;
-  }
-  .cell.cell-index {
-    flex: none;
-    min-width: 60px;
   }
 </style>
 ```
