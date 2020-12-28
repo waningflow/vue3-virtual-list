@@ -1,6 +1,6 @@
 {
   "name": "vue3-virtual-list",
-  "version": "1.0.0-alpha1",
+  "version": "1.0.0-alpha2",
   "module": "dist/index.esm.js",
   "main": "dist/index.cjs.js",
   "unpkg": "dist/index.global.js",
@@ -13,9 +13,7 @@
   "files": [
     "dist/"
   ],
-  "dependencies": {
-    "core-js": "^3.6.5",
-    "faker": "^5.1.0",
+  "peerDependencies": {
     "vue": "^3.0.0"
   },
   "devDependencies": {
