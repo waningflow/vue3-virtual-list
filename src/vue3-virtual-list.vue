@@ -31,7 +31,7 @@ interface Props {
 }
 
 export default defineComponent({
-  name: "VueVirtualList",
+  name: "VirtualList",
   props: {
     data: {
       type: Array,
@@ -104,7 +104,7 @@ export default defineComponent({
 });
 </script>
 
-<style scoped lang="less">
+<style scoped>
 .vue3-virtual-list-container {
   width: 100%;
   height: 100%;

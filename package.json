@@ -1,18 +1,28 @@
 {
   "name": "vue3-virtual-list",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0-alpha1",
+  "module": "dist/index.esm.js",
+  "main": "dist/index.cjs.js",
+  "unpkg": "dist/index.global.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "build-npm": "rollup -c rollup.config.js"
   },
+  "files": [
+    "dist/"
+  ],
   "dependencies": {
     "core-js": "^3.6.5",
     "faker": "^5.1.0",
     "vue": "^3.0.0"
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.12.7",
+    "@rollup/plugin-babel": "^5.2.2",
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-typescript": "^8.1.0",
     "@types/faker": "^5.1.5",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
@@ -29,7 +39,11 @@
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
     "lint-staged": "^9.5.0",
+    "postcss": "^8.2.1",
     "prettier": "^1.19.1",
+    "rollup": "^2.35.1",
+    "rollup-plugin-postcss": "^4.0.0",
+    "rollup-plugin-vue": "^6.0.0",
     "typescript": "~3.9.3"
   },
   "gitHooks": {
