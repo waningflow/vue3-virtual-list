@@ -1,7 +1,12 @@
 {
   "name": "vue3-virtual-list",
-  "version": "1.0.0",
-  "keywords": ["vue", "vue3", "scroll", "list"],
+  "version": "1.0.1",
+  "keywords": [
+    "vue",
+    "vue3",
+    "scroll",
+    "list"
+  ],
   "author": "https://github.com/waningflow",
   "license": "MIT",
   "repository": {
@@ -14,6 +19,7 @@
   "module": "dist/index.esm.js",
   "main": "dist/index.cjs.js",
   "unpkg": "dist/index.global.js",
+  "typings": "index.d.ts",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -21,7 +27,8 @@
     "build-npm": "rollup -c rollup.config.js"
   },
   "files": [
-    "dist/"
+    "dist/",
+    "index.d.ts"
   ],
   "peerDependencies": {
     "vue": "^3.0.0"

@@ -1,6 +1,7 @@
 # vue3-virtual-list
 
 [![npm](https://img.shields.io/npm/v/vue3-virtual-list.svg)](https://www.npmjs.com/package/vue3-virtual-list)
+[![downloads](https://img.shields.io/npm/dm/vue3-virtual-list.svg)](https://www.npmjs.com/package/vue3-virtual-list)
 [![vue3](https://img.shields.io/badge/vue-3.x-brightgreen.svg)](https://vuejs.org/)
 
 Scroll list for big acount of data. Based on Vue3.
