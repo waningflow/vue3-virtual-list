@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { ref, toRefs, defineComponent, onMounted } from "vue";
+import { ref, toRefs, defineComponent, onMounted, watch } from "vue";
 
 interface Props {
   data: any[];
@@ -55,6 +55,15 @@ export default defineComponent({
     const root = ref<HTMLElement | null>(null);
     const pool = ref<any[]>([]);
     const scrollHeight = ref(data.value.length * itemSize.value);
+
+    watch(data, cData => {
+      scrollHeight.value = cData.length * itemSize.value;
+    });
+
+    watch(itemSize, cItemSize => {
+      scrollHeight.value = data.value.length * cItemSize;
+    });
+
     let containerSize = 0;
     const paddingTop = ref(0);
     let isScrollBusy = false;

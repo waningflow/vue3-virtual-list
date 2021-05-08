@@ -1,16 +1,22 @@
 <template>
-  <div class="list-container">
-    <VueVirtualList :data="dataSource">
-      <template v-slot="{ item, index }">
-        <div class="item-container">
-          <div class="cell cell-index">{{ index + 1 }}</div>
-          <!-- <div class="cell cell-img"><img :src="item.img" /></div> -->
-          <div class="cell">{{ item.name }}</div>
-          <div class="cell">{{ item.email }}</div>
-          <div class="cell">{{ item.address }}</div>
-        </div>
-      </template>
-    </VueVirtualList>
+  <div>
+    <div class="action-container">
+      <input v-model="dataCount" />
+      <button @click="updateDataSource">Update</button>
+    </div>
+    <div class="list-container">
+      <VueVirtualList :data="dataSource">
+        <template v-slot="{ item, index }">
+          <div class="item-container">
+            <div class="cell cell-index">{{ index + 1 }}</div>
+            <!-- <div class="cell cell-img"><img :src="item.img" /></div> -->
+            <div class="cell">{{ item.name }}</div>
+            <div class="cell">{{ item.email }}</div>
+            <div class="cell">{{ item.address }}</div>
+          </div>
+        </template>
+      </VueVirtualList>
+    </div>
   </div>
 </template>
 
@@ -23,11 +29,17 @@ export default defineComponent({
   name: "App",
   data() {
     return {
-      dataSource: mock(100000)
+      dataCount: 10000,
+      dataSource: mock(10000)
     };
   },
   components: {
     VueVirtualList
+  },
+  methods: {
+    updateDataSource() {
+      this.dataSource = mock(this.dataCount);
+    }
   }
 });
 </script>
@@ -65,6 +77,12 @@ export default defineComponent({
   &.cell-img {
     flex: none;
     min-width: 60px;
+  }
+}
+.action-container {
+  margin-bottom: 16px;
+  button {
+    margin-left: 10px;
   }
 }
 </style>
